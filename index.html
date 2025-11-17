@@ -1,37 +1,174 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ServeSalud - Voluntariado Hospitalario</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>ServeSalud</h1>
-      <p>Conecta corazones, cambia vidas 💙</p>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ServeSalud — Voluntariado Hospitalario</title>
 
-    <section class="hero">
-      <h2>Únete como voluntario</h2>
-      <p>Participa en campañas y ayuda a mejorar la atención hospitalaria.</p>
-      <button>Ver oportunidades</button>
-    </section>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <section class="beneficios">
-      <h2>Beneficios</h2>
-      <ul>
-        <li>Certificados oficiales</li>
-        <li>Desarrollo de habilidades blandas</li>
-        <li>Experiencia para tu CV</li>
-        <li>Impacto social real</li>
-      </ul>
-    </section>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <!-- Reemplaza src por la ruta de tu logo -->
+        <img src="logo-placeholder.png" alt="Logo ServeSalud" class="brand-logo" />
+        <span class="brand-name">Serve<span>Salud</span></span>
+      </a>
 
-    <footer>
-      <p>© ServeSalud 2025 - Todos los derechos reservados</p>
-    </footer>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#oportunidades">Oportunidades</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
 
-    <script src="script.js"></script>
-  </body>
+      <div class="actions">
+        <a class="btn btn-ghost" href="#login">Iniciar sesión</a>
+        <a class="btn btn-primary" href="#registro">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">Conecta corazones, cambia vidas <span aria-hidden="true">💙</span></h1>
+        <p class="hero-sub">
+          Únete como voluntario en hospitales de Lima Metropolitana, participa en campañas y recibe certificados oficiales por tus horas de servicio.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary large" href="#oportunidades">Ver oportunidades</a>
+          <a class="btn btn-outline" href="#registro">Quiero postular</a>
+        </div>
+
+        <ul class="hero-stats" aria-hidden="true">
+          <li><strong>+120</strong> oportunidades</li>
+          <li><strong>30+</strong> hospitales</li>
+          <li><strong>Certificado</strong> oficial</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <!-- Imagen o mockup del mobile / ilustración -->
+        <div class="phone-mockup">
+          <div class="phone-screen">Vista de la app</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPORTUNIDADES -->
+  <section id="oportunidades" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Oportunidades activas</h2>
+        <p>Explora campañas por hospital, distrito y tipo de actividad. Postula en pocos pasos.</p>
+      </div>
+
+      <div class="cards">
+        <!-- Card 1 -->
+        <article class="card">
+          <h3>Hospital Nacional</h3>
+          <p class="muted">Distrito: Cercado de Lima • Actividad: Acompañamiento emocional</p>
+          <p class="card-desc">Apoya en acompañamiento a pacientes en áreas de consulta externa. Turnos de 3 horas.</p>
+          <div class="card-actions">
+            <a class="btn btn-secondary" href="#detalle1">Ver detalles</a>
+            <a class="btn btn-ghost small" href="#postular1">Postularme</a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <h3>Clínica San José</h3>
+          <p class="muted">Distrito: Miraflores • Actividad: Recepción y orientación</p>
+          <p class="card-desc">Apoyo en orientación a pacientes y acompañamiento en áreas no clínicas.</p>
+          <div class="card-actions">
+            <a class="btn btn-secondary" href="#detalle2">Ver detalles</a>
+            <a class="btn btn-ghost small" href="#postular2">Postularme</a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <h3>Hospital Materno Infantil</h3>
+          <p class="muted">Distrito: San Miguel • Actividad: Actividades recreativas</p>
+          <p class="card-desc">Actividades lúdicas para niños hospitalizados y apoyo en talleres.</p>
+          <div class="card-actions">
+            <a class="btn btn-secondary" href="#detalle3">Ver detalles</a>
+            <a class="btn btn-ghost small" href="#postular3">Postularme</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="center">
+        <a class="btn btn-outline" href="#todas">Ver todas las oportunidades</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section id="beneficios" class="section alt">
+    <div class="container grid-2">
+      <div>
+        <h2>Por qué participar</h2>
+        <ul class="benefit-list">
+          <li>Certificados oficiales por horas de voluntariado.</li>
+          <li>Desarrollo de habilidades blandas y experiencia práctica.</li>
+          <li>Impacto directo en la comunidad y apoyo emocional a pacientes.</li>
+        </ul>
+      </div>
+      <div class="benefit-visual" aria-hidden="true">
+        <div class="illustration">[Ilustración]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta">
+    <div class="container center">
+      <h3>¿Listo para ayudar?</h3>
+      <p>Regístrate y comienza a postular en minutos.</p>
+      <a class="btn btn-primary large" href="#registro">Crear cuenta</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto" class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="#">
+          <img src="logo-placeholder.png" alt="ServeSalud" class="brand-logo small" />
+          <span class="brand-name">Serve<span>Salud</span></span>
+        </a>
+        <p class="muted">Plataforma para la gestión de oportunidades de voluntariado en hospitales de EsSalud - Lima Metropolitana.</p>
+      </div>
+
+      <div>
+        <h4>Enlaces rápidos</h4>
+        <ul class="footer-links">
+          <li><a href="#oportunidades">Oportunidades</a></li>
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <p>soporte@servesalud.org</p>
+        <p>Tel: (01) 234-5678</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© ServeSalud 2025 • Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
 </html>
