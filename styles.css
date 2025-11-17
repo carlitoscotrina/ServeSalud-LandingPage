@@ -1,36 +1,132 @@
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #ffffff;
+/* Paleta */
+:root{
+  --green: #34A853; /* primario */
+  --blue:  #1A73E8; /* secundario */
+  --bg:    #ffffff;
+  --muted: #f6f8fb;
+  --text:  #111827;
+  --muted-text: #6b7280;
+  --card-bg: #ffffff;
+  --radius: 12px;
+  --container: 1100px;
 }
 
-header {
-  background: #1a73e8;
-  color: white;
-  padding: 30px;
-  text-align: center;
+/* Reset y base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Roboto', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  background:var(--muted);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 20px;
 }
 
-.hero {
-  padding: 40px;
-  text-align: center;
+/* HEADER */
+.site-header{
+  background:#fff;
+  border-bottom:1px solid #e6e9ef;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--text);
+}
+.brand-logo{width:44px;height:44px;object-fit:contain;border-radius:8px;background:#f1f5f9}
+.brand-logo.small{width:36px;height:36px}
+.brand-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px}
+.brand-name span{color:var(--blue)}
+.main-nav{display:flex;gap:18px}
+.main-nav a{color:var(--muted-text);text-decoration:none;font-weight:500}
+.actions{display:flex;gap:10px;align-items:center}
+
+/* BOTONES */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;font-weight:600;text-decoration:none;cursor:pointer}
+.btn-primary{background:var(--green);color:white;border:0;box-shadow:0 6px 18px rgba(52,168,83,0.12)}
+.btn-primary:hover,.btn-primary:focus{transform:translateY(-1px);box-shadow:0 10px 30px rgba(52,168,83,0.14)}
+.btn-secondary{background:var(--blue);color:white;border:0;border-radius:10px;padding:9px 12px}
+.btn-outline{background:transparent;color:var(--blue);border:2px solid var(--blue);padding:9px 12px;border-radius:10px}
+.btn-ghost{background:transparent;border:1px solid transparent;color:var(--muted-text)}
+.btn.small{padding:6px 10px;font-size:14px}
+.large{padding:14px 20px;font-size:16px}
+
+/* HERO */
+.hero{background:var(--bg);padding:56px 0}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
+.hero-title{font-family:'Montserrat',sans-serif;font-size:36px;margin:0 0 12px}
+.hero-sub{color:var(--muted-text);margin:0 0 20px}
+.hero-cta{display:flex;gap:12px;margin-bottom:18px}
+.hero-stats{display:flex;gap:18px;list-style:none;padding:0;margin:0;color:var(--muted-text)}
+.hero-stats li{font-weight:600;background:rgba(26,115,232,0.06);padding:8px 12px;border-radius:8px}
+
+/* phone mockup */
+.phone-mockup{width:340px;height:640px;background:linear-gradient(180deg,#eef7ff,#f7fbff);border-radius:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 40px rgba(16,24,40,0.08)}
+.phone-screen{background:linear-gradient(180deg,#ffffff,#f6f9ff);width:86%;height:88%;border-radius:18px;display:flex;align-items:center;justify-content:center;color:var(--muted-text)}
+
+/* SECTIONS */
+.section{padding:48px 0}
+.section-head{text-align:center;max-width:760px;margin:0 auto 28px}
+.section .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+
+/* CARD */
+.card{background:var(--card-bg);border-radius:14px;padding:20px;box-shadow:0 10px 30px rgba(16,24,40,0.04)}
+.card h3{margin:0 0 6px;color:var(--blue)}
+.muted{color:var(--muted-text);font-size:14px;margin-bottom:8px}
+.card-desc{color:#374151;font-size:15px}
+.card-actions{display:flex;gap:10px;margin-top:14px;align-items:center}
+
+/* GRID 2 columnas */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+
+/* BENEFITS */
+.benefit-list{padding-left:18px;color:#111827}
+.benefit-visual .illustration{height:180px;background:linear-gradient(90deg,#f1f7ff,#e9f3ff);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--muted-text)}
+
+/* CTA */
+.cta{background:linear-gradient(90deg,#f7fbff,#ffffff);padding:40px 0}
+.center{text-align:center}
+
+/* FOOTER */
+.site-footer{background:#fff;padding:40px 0;border-top:1px solid #eef2f7;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.footer-links{list-style:none;padding:0;margin:0}
+.footer-links li{margin-bottom:8px}
+.footer-bottom{text-align:center;padding:18px 0;color:var(--muted-text);font-size:13px}
+
+/* Responsiveness */
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr 320px}
+  .section .cards{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .main-nav{display:none}
 }
 
-button {
-  background: #34a853;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.beneficios {
-  padding: 30px;
-}
-
-footer {
-  background: #f2f2f2;
-  text-align: center;
-  padding: 20px;
+@media (max-width:680px){
+  .hero-grid{grid-template-columns:1fr;gap:18px;padding:24px 0}
+  .phone-mockup{width:260px;height:480px}
+  .section .cards{grid-template-columns:1fr}
+  .brand-name{font-size:16px}
+  .hero-title{font-size:26px}
+  .btn{padding:10px 12px}
+  .header-inner{padding:12px 0}
+  .brand-logo{width:40px;height:40px}
 }
