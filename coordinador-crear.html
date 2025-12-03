@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crear oportunidad - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" class="logo-img" alt="ServeSalud"></a></div>
+    </div>
+  </header>
+
+  <main class="container form-page">
+    <section class="auth-card">
+      <h2>Crear nueva oportunidad</h2>
+      <form id="create-op-form">
+        <input id="op-title" type="text" placeholder="Título (ej. Acompañamiento emocional)" required>
+        <input id="op-hospital" type="text" placeholder="Hospital / Clínica" required>
+        <input id="op-distrito" type="text" placeholder="Distrito" required>
+        <input id="op-fecha" type="date" required>
+        <input id="op-hora" type="time" required>
+        <input id="op-cupos" type="number" placeholder="Cupos" value="5" required>
+        <textarea id="op-desc" rows="4" placeholder="Descripción" required></textarea>
+        <button class="btn-primary" type="submit">Publicar oportunidad</button>
+      </form>
+      <p id="create-op-msg" class="muted"></p>
+    </section>
+  </main>
+
+  <footer class="footer small-footer"><div class="container"><p>ServeSalud © 2025</p></div></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registrarse - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .ss-alert-inline { position: fixed; right: 20px; bottom: 20px; padding: 12px 16px; border-radius: 10px; box-shadow:0 6px 18px rgba(0,0,0,0.12); z-index:9999; opacity:0; transform:translateY(10px); transition:all .25s; }
+    .ss-alert-inline.show{opacity:1;transform:translateY(0);}
+    .ss-alert-inline.success{background:#e6ffef;color:#064e3b;}
+    .ss-alert-inline.error{background:#ffebeb;color:#6b1b1b;}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" alt="ServeSalud" class="logo-img"></a></div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container container-form" style="max-width:540px">
+      <h2>Crear cuenta</h2>
+      <p class="muted">Regístrate como voluntario o coordinador.</p>
+
+      <form id="register-form" novalidate>
+        <input id="nombre" name="nombre" placeholder="Nombre completo" required>
+        <input id="dni" name="dni" placeholder="DNI">
+        <input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required>
+        <input id="telefono" name="telefono" placeholder="Teléfono">
+        <input id="password" name="password" type="password" placeholder="Contraseña" required>
+        <label for="role">Rol</label>
+        <select id="role" name="role">
+          <option value="voluntario">Voluntario</option>
+          <option value="coordinador">Coordinador</option>
+        </select>
+        <button type="submit" class="btn-primary" style="width:100%;margin-top:10px">Crear cuenta</button>
+      </form>
+
+      <p style="margin-top:12px">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </div>
+  </main>
+
+  <div id="ss-alert-root"></div>
+
+  <script>
+    (function(){
+      'use strict';
+      // Helpers de storage
+      function lsGet(key){ try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : null } catch(e){ console.error(e); return null } }
+      function lsSet(key,val){ try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){ console.error(e) } }
+      function sessionSet(key,val){ try{ sessionStorage.setItem(key, JSON.stringify(val)); }catch(e){console.error(e)} }
+
+      // Seed users por defecto (si no existen)
+      if(!lsGet('ss_users')){
+        lsSet('ss_users', [
+          { id: 'u_admin', name: 'Admin Serve', email: 'admin@servesalud.org', role: 'admin', password: 'admin123' },
+          { id: 'u_coord', name: 'Coordinador', email: 'coord@servesalud.org', role: 'coordinador', password: 'coord123' },
+          { id: 'u_demo', name: 'Usuario Demo', email: 'demo@servesalud.org', role: 'voluntario', password: 'demo123', hours: 32 }
+        ]);
+      }
+
+      // Alert UI
+      function showAlert(msg, type='success'){
+        const root = document.getElementById('ss-alert-root'); if(!root) return;
+        const el = document.createElement('div'); el.className = 'ss-alert-inline ' + (type==='error' ? 'error':'success'); el.textContent = msg;
+        root.appendChild(el);
+        requestAnimationFrame(()=> el.classList.add('show'));
+        setTimeout(()=>{ el.classList.remove('show'); setTimeout(()=> el.remove(),300) }, 2400);
+      }
+
+      const form = document.getElementById('register-form');
+      if(!form) return;
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = (document.getElementById('nombre')||{}).value.trim();
+        const dni = (document.getElementById('dni')||{}).value.trim();
+        const email = ((document.getElementById('email')||{}).value || '').trim().toLowerCase();
+        const tel = (document.getElementById('telefono')||{}).value.trim();
+        const pwd = (document.getElementById('password')||{}).value;
+        const role = (document.getElementById('role')||{}).value || 'voluntario';
+
+        if(!name || !email || !pwd){
+          showAlert('Completa los campos requeridos.', 'error'); return;
+        }
+
+        const users = lsGet('ss_users') || [];
+        if(users.find(u => u.email === email)){
+          showAlert('El correo ya está registrado.', 'error'); return;
+        }
+
+        const id = 'u_' + Math.random().toString(36).slice(2,9);
+        const newUser = { id, name, dni, email, telefono: tel, password: pwd, role, hours:0 };
+        users.push(newUser);
+        lsSet('ss_users', users);
+        sessionSet('ss_current_user', newUser); // loguea automáticamente
+        showAlert('Registro exitoso. Redirigiendo...', 'success');
+        setTimeout(()=> window.location.href = 'perfil.html', 800);
+      });
+    })();
+  </script>
+</body>
+</html>

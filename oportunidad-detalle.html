@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Detalle oportunidad - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" alt="ServeSalud" class="logo-img"></a></div>
+      <nav class="nav"><a href="index.html">Inicio</a><a href="oportunidades.html">Oportunidades</a></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="op-detail">
+      <div class="section-header">
+        <h1 id="op-title">Hospital Nacional — Acompañamiento emocional</h1>
+        <div>
+          <button class="btn-secondary" id="btn-postular">Postularme</button>
+          <a class="btn-outline" href="oportunidades.html">Volver</a>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card" id="op-card">
+          <img src="img/op-1.png" alt="" class="card-img">
+          <div class="card-body">
+            <h3>Descripción</h3>
+            <p id="op-desc">Acompañamiento emocional a pacientes en salas de mediana estadía. Requiere empatía y disponibilidad por la mañana.</p>
+            <p><strong>Requisitos:</strong> DNI, certificado de estudios básicos y constancia de antecedentes.</p>
+            <p><strong>Fecha y horario:</strong> 12/12/2025 - 09:00 a 13:00</p>
+            <p><strong>Ubicación:</strong> Cercado de Lima</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Detalles adicionales</h3>
+          <ul>
+            <li>Cupos disponibles: <span id="op-cupos">5</span></li>
+            <li>Contacto coordinador: coord@hospitalnacional.pe</li>
+            <li>Tipo: Acompañamiento emocional</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Postulaciones</h3>
+          <div id="applicants-list" class="muted">Cargando postulantes...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer small-footer"><div class="container"><p>ServeSalud © 2025</p></div></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

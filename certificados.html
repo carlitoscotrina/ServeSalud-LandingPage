@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Certificados - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html"><img src="img/Logo ServeSalud.png" alt="Logo ServeSalud" class="logo-img"></a>
+      </div>
+      <nav class="nav" aria-label="Menú principal">
+        <a href="index.html">Inicio</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="perfil.html">Mi perfil</a>
+        <a href="soporte.html">Soporte</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn-outline" href="login.html">Iniciar sesión</a>
+        <a class="btn-primary" href="register.html">Únete ahora</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="section">
+    <div class="container">
+      <h1>Mis certificados</h1>
+      <p class="muted">Aquí puedes ver y descargar tus certificados por horas de voluntariado.</p>
+
+      <!-- Si el usuario tiene certificados: lista -->
+      <div class="cards" style="margin-top:18px; gap:16px;">
+        <!-- Certificado 1 -->
+        <article class="card" style="display:flex;align-items:center;gap:14px;">
+          <div style="width:84px;height:84px;border-radius:8px;background:#f6f9fb;display:flex;align-items:center;justify-content:center">
+            <img src="img/cert-icon.png" alt="Ícono certificado" style="width:48px;height:48px">
+          </div>
+          <div style="flex:1">
+            <h3 style="margin:0 0 6px">Certificado de Participación</h3>
+            <p class="muted" style="margin:0 0 8px">Acompañamiento emocional — Hospital Nacional</p>
+            <small class="muted">Emitido: 12 de diciembre de 2025 · Horas acreditadas: 8</small>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <!-- Cambia href a la ruta real del PDF si lo tienes -->
+            <a class="btn-secondary" href="img/certificado-ejemplo.pdf" target="_blank" rel="noopener noreferrer">Ver / Descargar</a>
+            <a class="btn-outline" href="perfil.html">Volver al perfil</a>
+          </div>
+        </article>
+
+        <!-- Certificado 2 (ejemplo) -->
+        <article class="card" style="display:flex;align-items:center;gap:14px;">
+          <div style="width:84px;height:84px;border-radius:8px;background:#f6f9fb;display:flex;align-items:center;justify-content:center">
+            <img src="img/cert-icon.png" alt="Ícono certificado" style="width:48px;height:48px">
+          </div>
+          <div style="flex:1">
+            <h3 style="margin:0 0 6px">Certificado de Participación</h3>
+            <p class="muted" style="margin:0 0 8px">Actividades recreativas — Hospital Materno Infantil</p>
+            <small class="muted">Emitido: 05 de noviembre de 2025 · Horas acreditadas: 6</small>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a class="btn-secondary" href="img/certificado-ejemplo.pdf" target="_blank" rel="noopener noreferrer">Ver / Descargar</a>
+            <a class="btn-outline" href="perfil.html">Volver al perfil</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Mensaje si no hay certificados (visibilidad condicional manual en prototipo) -->
+      <!-- <p class="muted">No tienes certificados aún. Participa en una actividad para obtener tu certificado.</p> -->
+
+      <!-- Opcional: vista previa embebida (PDF) -->
+      <section style="margin-top:28px">
+        <h2 style="font-size:18px;margin-bottom:8px">Vista previa (ejemplo)</h2>
+        <div class="card" style="padding:12px;">
+          <p class="muted" style="margin:0 0 8px">Si el navegador lo soporta, el PDF se mostrará aquí.</p>
+          <object data="img/certificado-ejemplo.pdf" type="application/pdf" width="100%" height="420">
+            <p class="muted">Tu navegador no puede mostrar PDF embebidos. <a href="img/certificado-ejemplo.pdf" target="_blank" rel="noopener noreferrer">Descarga el certificado</a>.</p>
+          </object>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+        <div>
+          <img src="img/Logo ServeSalud.png" alt="ServeSalud" style="height:36px"><br>
+          <small>ServeSalud © 2025</small>
+        </div>
+        <div style="text-align:right">
+          <p>Contacto: soporte@servesalud.org</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

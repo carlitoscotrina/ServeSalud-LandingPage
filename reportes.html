@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reportes - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header"><div class="container header-inner"><div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" class="logo-img"></a></div></div></header>
+
+  <main class="container">
+    <h1>Generar reportes</h1>
+    <form id="report-form" class="card">
+      <label>Desde</label><input id="report-from" type="date" required>
+      <label>Hasta</label><input id="report-to" type="date" required>
+      <label>Tipo de reporte</label>
+      <select id="report-type">
+        <option value="general">General de actividad</option>
+        <option value="horas">Horas por voluntario</option>
+      </select>
+      <button class="btn-primary" type="submit">Generar y descargar CSV</button>
+    </form>
+    <div id="report-msg" class="muted"></div>
+  </main>
+
+  <footer class="footer small-footer"><div class="container"><p>ServeSalud © 2025</p></div></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

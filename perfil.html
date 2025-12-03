@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>.muted{color:#666}</style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" class="logo-img" alt="ServeSalud"></a></div>
+      <nav class="nav"><a href="index.html">Inicio</a><a href="oportunidades.html">Oportunidades</a></nav>
+      <div class="header-actions"><a class="btn-outline" href="login.html">Salir</a></div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="card" style="padding:18px;margin-bottom:14px;">
+        <h2 id="profile-name">Mi perfil</h2>
+        <p id="profile-email" class="muted"></p>
+        <p>Horas registradas: <strong id="profile-hours">0</strong></p>
+        <p><a class="btn-outline" href="perfil-editar.html">Editar perfil</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Mis postulaciones</h3>
+        <ul class="postulaciones">
+          <li>Acompañamiento emocional — <span class="muted">Aprobada</span></li>
+          <li>Recepción y apoyo — <span class="muted">Pendiente</span></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container">ServeSalud © 2025</div></footer>
+
+  <script>
+    (function(){
+      'use strict';
+      function sessionGet(k){ try{ const r = sessionStorage.getItem(k); return r ? JSON.parse(r) : null } catch(e){ return null } }
+      const user = sessionGet('ss_current_user');
+      if(!user){
+        // si no hay sesión, redirigir a login (silencioso)
+        window.location.href = 'login.html';
+      } else {
+        document.getElementById('profile-name').textContent = user.name || 'Mi perfil';
+        document.getElementById('profile-email').textContent = user.email || '';
+        document.getElementById('profile-hours').textContent = user.hours || 0;
+      }
+    })();
+  </script>
+</body>
+</html>

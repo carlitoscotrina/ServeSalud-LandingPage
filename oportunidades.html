@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oportunidades - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html">
+        <img src="img/Logo ServeSalud.png" alt="ServeSalud" class="logo-img">
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="oportunidades.html">Oportunidades</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="oportunidades-list">
+      <h1>Oportunidades activas</h1>
+      <div class="filter-row">
+        <input id="search" type="search" placeholder="Buscar por hospital, distrito o actividad">
+        <select id="filter-distrito">
+          <option value="">Distrito</option>
+          <option>San Isidro</option>
+          <option>San Miguel</option>
+          <option>Cercado de Lima</option>
+        </select>
+      </div>
+
+      <div class="cards cards-list" id="op-cards">
+        <!-- Oportunidades renderizadas por JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer small-footer">
+    <div class="container">
+      <p>ServeSalud © 2025</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
