@@ -38,6 +38,29 @@ body{
   width: auto;
   display: block;
 }
+.btn-outline {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 2px solid var(--blue);
+  color: var(--blue);
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
 
 /* HERO */
 .hero{background:var(--bg);padding:64px 0}
@@ -133,4 +156,5 @@ body{
   .benefits{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .auth-grid{grid-template-columns:1fr}
+
 }
