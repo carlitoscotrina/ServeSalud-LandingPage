@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mensajería - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .conv-list{max-width:980px;margin:18px auto;display:flex;flex-direction:column;gap:10px}
+    .conv-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;background:#fff;box-shadow:0 6px 14px rgba(0,0,0,0.04)}
+    .conv-avatar{width:56px;height:56px;border-radius:50%;background:#e9f0ff;display:flex;align-items:center;justify-content:center;font-weight:600;color:#1a73e8}
+    .conv-meta{flex:1}
+    .conv-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+    .badge{background:var(--green);color:#fff;padding:4px 8px;border-radius:18px;font-size:12px}
+    .small-muted{font-size:13px;color:#666}
+    .top-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" class="logo-img" alt="ServeSalud"></a></div>
+      <nav class="nav"><a href="index.html">Inicio</a><a href="oportunidades.html">Oportunidades</a></nav>
+      <div class="header-actions"><a class="btn-outline" href="perfil.html">Mi perfil</a></div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="top-actions">
+        <h2>Mensajería interna</h2>
+        <div>
+          <a class="btn-outline" href="chat.html?new=1">Crear nueva conversación</a>
+        </div>
+      </div>
+
+      <div class="conv-list" id="conv-list"></div>
+      <p class="muted" style="text-align:center;margin-top:12px">Mensajes guardados en tu navegador (simulación local).</p>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container">ServeSalud © 2025</div></footer>
+
+<script>
+(function(){
+  'use strict';
+  // Helpers storage
+  function lsGet(k){ try{ const r = localStorage.getItem(k); return r? JSON.parse(r): null }catch(e){return null} }
+  function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} }
+  function sessionGet(k){ try{ const r = sessionStorage.getItem(k); return r? JSON.parse(r): null }catch(e){return null} }
+
+  // Current user (if no session, seed demo user)
+  let current = sessionGet('ss_current_user') || null;
+  if(!current){
+    current = { id:'u_demo', name:'Usuario Demo', email:'demo@servesalud.org', role:'voluntario' };
+    sessionStorage.setItem('ss_current_user', JSON.stringify(current));
+  }
+
+  // Seed conversations if none
+  let convs = lsGet('ss_conversations');
+  if(!convs){
+    convs = [
+      { id:'c1', title:'Coordinador - Hospital Nacional', members:['u_coord','u_demo'], unread:1,
+        messages:[
+          {from:'u_coord', text:'Hola Carlos, necesitamos confirmar tu asistencia el 12/12.', ts: Date.now()-86400000},
+          {from:'u_demo', text:'Perfecto, puedo asistir.', ts: Date.now()-86300000}
+        ]
+      },
+      { id:'c2', title:'Equipo Voluntariado', members:['u_admin','u_demo'], unread:0,
+        messages:[
+          {from:'u_admin', text:'Bienvenido al grupo, aquí compartimos horarios.', ts: Date.now()-172800000}
+        ]
+      }
+    ];
+    lsSet('ss_conversations', convs);
+  }
+
+  const listEl = document.getElementById('conv-list');
+
+  function renderList(){
+    listEl.innerHTML = '';
+    convs.forEach(c => {
+      const last = c.messages && c.messages.length ? c.messages[c.messages.length-1] : null;
+      const item = document.createElement('div'); item.className='conv-item';
+      item.innerHTML = `
+        <div class="conv-avatar">${c.title.split(' ').slice(0,2).map(w=>w[0]||'').join('')}</div>
+        <div class="conv-meta">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>${c.title}</strong>
+            <small class="small-muted">${ last ? new Date(last.ts).toLocaleString() : '' }</small>
+          </div>
+          <div class="small-muted">${ last ? (last.from===current.id ? 'Tú: ' : '') + last.text : 'Sin mensajes' }</div>
+        </div>
+        <div class="conv-actions">
+          ${c.unread? `<span class="badge">${c.unread}</span>` : ''}
+          <a class="btn-secondary" href="chat.html?cid=${encodeURIComponent(c.id)}">Abrir</a>
+        </div>
+      `;
+      listEl.appendChild(item);
+    });
+  }
+
+  // If nav came with ?new=1 create quick conv
+  const params = new URLSearchParams(location.search);
+  if(params.get('new') === '1'){
+    // create sample new conversation with unique id
+    const nid = 'c_' + Math.random().toString(36).slice(2,8);
+    const newConv = { id:nid, title:'Nueva conversación', members:[current.id], unread:0, messages:[] };
+    convs.unshift(newConv);
+    lsSet('ss_conversations', convs);
+    // redirect to chat
+    window.location.href = 'chat.html?cid=' + encodeURIComponent(nid);
+    return;
+  }
+
+  renderList();
+
+  // Optional: expose function to mark as read when returning from chat
+  window.addEventListener('storage', () => {
+    convs = lsGet('ss_conversations') || convs;
+    renderList();
+  });
+})();
+</script>
+</body>
+</html>
