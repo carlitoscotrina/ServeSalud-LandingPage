@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chat - ServeSalud</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .chat-wrap{max-width:980px;margin:18px auto;display:grid;grid-template-columns:320px 1fr;gap:16px}
+    .side{background:#fff;padding:12px;border-radius:10px}
+    .chat-window{background:#fff;padding:12px;border-radius:10px;display:flex;flex-direction:column;height:60vh}
+    .msg-list{flex:1;overflow:auto;padding:6px;display:flex;flex-direction:column;gap:8px}
+    .msg{max-width:70%;padding:10px;border-radius:10px}
+    .msg.me{align-self:flex-end;background:#e6ffef}
+    .msg.them{align-self:flex-start;background:#f1f6ff}
+    .chat-input{display:flex;gap:8px;margin-top:8px}
+    .chat-input input{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e6e6}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html"><img src="img/Logo ServeSalud.png" class="logo-img" alt="ServeSalud"></a></div>
+      <nav class="nav"><a href="index.html">Inicio</a><a href="mensajes.html">Mensajes</a></nav>
+      <div class="header-actions"><a class="btn-outline" href="perfil.html">Mi perfil</a></div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container chat-wrap">
+      <aside class="side" id="conv-side">
+        <h3>Conversaciones</h3>
+        <div id="side-list"></div>
+      </aside>
+
+      <section class="chat-window" id="chat-window">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 id="chat-title">Chat</h3>
+          <div><a class="btn-outline" href="mensajes.html">Volver</a></div>
+        </div>
+
+        <div class="msg-list" id="msg-list" aria-live="polite"></div>
+
+        <div class="chat-input">
+          <input id="txt-msg" placeholder="Escribe un mensaje..." />
+          <button id="btn-send" class="btn-primary">Enviar</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container">ServeSalud © 2025</div></footer>
+
+<script>
+(function(){
+  'use strict';
+  function lsGet(k){ try{ const r = localStorage.getItem(k); return r? JSON.parse(r): null }catch(e){return null} }
+  function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} }
+  function sessionGet(k){ try{ const r = sessionStorage.getItem(k); return r? JSON.parse(r): null }catch(e){return null} }
+
+  const current = sessionGet('ss_current_user') || { id:'u_demo', name:'Usuario Demo', email:'demo@servesalud.org' };
+  let convs = lsGet('ss_conversations') || [];
+  const params = new URLSearchParams(location.search);
+  const cid = params.get('cid') || (convs[0] && convs[0].id) || null;
+
+  const sideList = document.getElementById('side-list');
+  const msgList = document.getElementById('msg-list');
+  const chatTitle = document.getElementById('chat-title');
+
+  function renderSide(){
+    sideList.innerHTML = '';
+    convs.forEach(c=>{
+      const el = document.createElement('div');
+      el.style.padding = '8px';
+      el.style.borderBottom = '1px solid #f1f1f1';
+      el.innerHTML = `<strong>${c.title}</strong><div class="small-muted">${(c.messages && c.messages.length)? c.messages[c.messages.length-1].text.slice(0,40): 'Sin mensajes'}</div>`;
+      el.style.cursor = 'pointer';
+      el.onclick = ()=> { location.href = 'chat.html?cid=' + encodeURIComponent(c.id); };
+      sideList.appendChild(el);
+    });
+  }
+
+  function renderChat(id){
+    const conv = convs.find(x=>x.id===id);
+    if(!conv){
+      chatTitle.textContent = 'Conversación no encontrada';
+      msgList.innerHTML = '<p class="muted">No hay conversación seleccionada.</p>';
+      return;
+    }
+    chatTitle.textContent = conv.title;
+    // mark as read
+    conv.unread = 0;
+    lsSet('ss_conversations', convs);
+    msgList.innerHTML = '';
+    (conv.messages||[]).forEach(m=>{
+      const mEl = document.createElement('div');
+      mEl.className = 'msg ' + (m.from === current.id ? 'me' : 'them');
+      mEl.innerHTML = `<div style="font-size:13px;margin-bottom:6px;color:#444">${ m.from === current.id ? 'Tú' : m.from }</div><div>${m.text}</div><div style="font-size:11px;color:#888;margin-top:6px">${ new Date(m.ts).toLocaleString() }</div>`;
+      msgList.appendChild(mEl);
+    });
+    // scroll to bottom
+    setTimeout(()=> msgList.scrollTop = msgList.scrollHeight, 50);
+  }
+
+  // send message
+  document.getElementById('btn-send').addEventListener('click', function(){
+    const text = (document.getElementById('txt-msg')||{}).value || '';
+    if(!text.trim()) return;
+    const conv = convs.find(x=>x.id===cid);
+    if(!conv){
+      alert('Conversación no encontrada.');
+      return;
+    }
+    const msg = { from: current.id, text: text.trim(), ts: Date.now() };
+    conv.messages = conv.messages || [];
+    conv.messages.push(msg);
+    // optionally simulate reply from other member after short delay (for demo)
+    lsSet('ss_conversations', convs);
+    document.getElementById('txt-msg').value = '';
+    renderChat(cid);
+    // simulate reply (demo)
+    setTimeout(()=> {
+      const reply = { from: conv.members.find(m=>m!==current.id) || 'u_coord', text: 'Gracias, recibí tu mensaje.', ts: Date.now() };
+      conv.messages.push(reply);
+      // mark unread if not in this chat (not necessary here)
+      lsSet('ss_conversations', convs);
+      renderChat(cid);
+    }, 800);
+  });
+
+  // initialize UI
+  renderSide();
+  if(cid) renderChat(cid);
+  // update list if storage changes
+  window.addEventListener('storage', ()=>{ convs = lsGet('ss_conversations') || convs; renderSide(); if(cid) renderChat(cid); });
+})();
+</script>
+</body>
+</html>
